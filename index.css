@@ -14,8 +14,8 @@ header {
   text-align: center;
   letter-spacing: 2px;
   /* Safari 4.0 - 8.0 */
-  -webkit-animation: changeFontColor 4s alternate ease infinite;
-  animation: changeFontColor 4s alternate ease infinite;
+  -webkit-animation: changeFontColor 2s alternate ease 2;
+  animation: changeFontColor 2s alternate ease 2;
 }
 
 /* Safari 4.0 - 8.0 */
