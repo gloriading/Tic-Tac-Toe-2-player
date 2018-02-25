@@ -38,6 +38,7 @@ $(document).ready(function(){
   function clickOnCell(where, who){
     let message="";
     if( gameBoard[where] === 'empty'){
+      $(`.cell#${where}`).html(whoPlay());
       gameBoard[where] = who;
       counter++;
       gameResult = checkWin();
@@ -45,7 +46,6 @@ $(document).ready(function(){
       if(gameResult =='X' || gameResult =='O'){
         message = `The winner is ${gameResult}`;
         deleverMessage(message);
-        console.log('wincombo is : ' + winCombo);
         winningBackground(winCombo, 'hotpink');
         modal.css('display','block');
         return message;
@@ -92,7 +92,6 @@ $(document).ready(function(){
     winCombo = null;
     $('.cell').html('');
     $('.cell').css('background-color','inherit');
-    $('#messageBox').html('Click on board to start.');
   }
 
   function deleverMessage(input){
@@ -108,9 +107,9 @@ $(document).ready(function(){
   //-----------------------------------------------------------
 
   gameReset();
+
   $('tbody').delegate('.cell','click', function(){
     let location = $( this ).attr('id');
-    $(this).html(whoPlay());
     clickOnCell(location, whoPlay());
   })
 
@@ -120,11 +119,6 @@ $(document).ready(function(){
   });
 
 
-  //-----------------------------------------------------------
-
-  // $(document).not(modal).click(function(){
-  //   modal.css('display','none');
-  // })
 
   // -------------------------------------------------------------- TESTING
 
