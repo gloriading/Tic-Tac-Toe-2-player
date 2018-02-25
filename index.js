@@ -4,7 +4,7 @@ $(document).ready(function(){
   let counter = 0;
   let gameBoard = new Array(9);
   let gameResult = "";
-
+  let winCombo; // for the effects after winning
   const winningCombos = [
                         [0,1,2],
                         [3,4,5],
@@ -15,6 +15,10 @@ $(document).ready(function(){
                         [0,4,8],
                         [2,4,6]
                       ];
+
+  const modal = $('.modal');
+
+
 
   function newBoard(){
     for(let i = 0; i < 9; i++){
@@ -39,16 +43,16 @@ $(document).ready(function(){
       gameResult = checkWin();
 
       if(gameResult =='X' || gameResult =='O'){
-        message = `the winner is ${gameResult}`;
-        // $('#messageBox').html(message);
-        // gameReset();
+        message = `The winner is ${gameResult}`;
         deleverMessage(message);
+        console.log('wincombo is : ' + winCombo);
+        winningBackground(winCombo, 'hotpink');
+        modal.css('display','block');
         return message;
       }else if(gameResult =='tie'){
         message = `No winner. Game Over.`;
-        // $('#messageBox').html(message);
-        // gameReset();
         deleverMessage(message);
+        modal.css('display','block');
         return message;
       }else{
         $('#messageBox').html(message);
@@ -56,52 +60,25 @@ $(document).ready(function(){
     }
   }
 
-// -------------------------------------------------------------- TESTING
-
-  // gameReset();
-  // console.log(clickOnCell('4', whoPlay())); // first player is X
-  // console.log(clickOnCell('0', whoPlay()));
-  // console.log(clickOnCell('6', whoPlay()));
-  // console.log(clickOnCell('2', whoPlay()));
-  // console.log(clickOnCell('8', whoPlay()));
-  // console.log(counter);
-  // console.log(clickOnCell('1', whoPlay()));
-  // console.log(counter);
-  // console.log(clickOnCell('7', whoPlay()));
-  // console.log(counter);
-  // console.log(clickOnCell('3', whoPlay()));
-  // console.log(clickOnCell('5', whoPlay()));
-  // console.log(clickOnCell('4', whoPlay()));
-
-  // console.log(gameBoard);
-
-  // console.log(clickOnCell('2', whoPlay()));
-  // console.log(clickOnCell('4', whoPlay()));
-  // console.log(clickOnCell('8', whoPlay()));
-  // console.log(clickOnCell('5', whoPlay()));
-  // console.log(clickOnCell('3', whoPlay()));
-  // console.log(clickOnCell('1', whoPlay()));
-  // console.log(clickOnCell('7', whoPlay()));
-  // console.log(clickOnCell('6', whoPlay()));
-  // console.log(clickOnCell('0', whoPlay()));
-  // console.log(clickOnCell('0', whoPlay()));
-
   function checkWin(){
     let winner= "undecided";
     for(let[index, win] of winningCombos.entries()){
-      let arr = [];
+        let arr = [];
 
-      for(let ele of win){
-        arr.push(gameBoard[ele]);
-      }
+        for(let ele of win){
+          arr.push(gameBoard[ele]);
+        }
 
-      if(arr.every(cell => cell == "X")){
-        winner = "X";
-        break;
-      }else if(arr.every(cell => cell == "O")){
-        winner = "O";
-        break;
-      }
+        if(arr.every(cell => cell == "X")){
+          winner = "X";
+          winCombo = win;
+          break;
+        }else if(arr.every(cell => cell == "O")){
+          winner = "O";
+          winCombo = win;
+          break;
+        }
+
     }
     if(gameBoard.every(cell => cell != 'empty')){
       winner = "tie";
@@ -109,44 +86,79 @@ $(document).ready(function(){
     return winner;
   }
 
-  // console.log(checkWin());
-
   function gameReset(){
     counter = 0;
     newBoard();
+    winCombo = null;
     $('.cell').html('');
+    $('.cell').css('background-color','inherit');
     $('#messageBox').html('Click on board to start.');
   }
 
   function deleverMessage(input){
-    const fixedMessage = 'Click on restart to play again.';
-    // $('#messageBox').html(input + " " +fixedMessage);
-    $('#messageBox').html(`${input} ${fixedMessage}`);
+    $('#messageBox').html(input);
   }
 
+  function winningBackground(paintWhere, color){
+    for(let ele of paintWhere){
+      let temp = `.cell#${ele}`;
+      $(temp).css('background-color',color);
+    }
+  }
   //-----------------------------------------------------------
-  // $('.cell').click(function(){
-  //   let location = $(this).attr('id');
-  //   console.log(location);
-  //   console.log(clickOnCell(location, whoPlay()));
-  //   // $(this).html(whoPlay());
-  // })
 
   gameReset();
   $('tbody').delegate('.cell','click', function(){
     let location = $( this ).attr('id');
     $(this).html(whoPlay());
-    // console.log(location);
-    console.log(clickOnCell(location, whoPlay()));
-    // console.log(counter);
-
-
+    clickOnCell(location, whoPlay());
   })
 
   $('#restart').click(function(){
-
     gameReset();
-
+    modal.css('display','none');
   });
+
+
+  //-----------------------------------------------------------
+// not necessary
+  // $('.close').click(function(){
+  //   modal.css('display','none');
+  //   gameReset();
+  // });
+
+  // $(document).not(modal).click(function(){
+  //   modal.css('display','none');
+  // })
+
+  // -------------------------------------------------------------- TESTING
+
+    // gameReset();
+    // console.log(clickOnCell('4', whoPlay())); // first player is X
+    // console.log(clickOnCell('0', whoPlay()));
+    // console.log(clickOnCell('6', whoPlay()));
+    // console.log(clickOnCell('2', whoPlay()));
+    // console.log(clickOnCell('8', whoPlay()));
+    // console.log(counter);
+    // console.log(clickOnCell('1', whoPlay()));
+    // console.log(counter);
+    // console.log(clickOnCell('7', whoPlay()));
+    // console.log(counter);
+    // console.log(clickOnCell('3', whoPlay()));
+    // console.log(clickOnCell('5', whoPlay()));
+    // console.log(clickOnCell('4', whoPlay()));
+
+    // console.log(gameBoard);
+
+    // console.log(clickOnCell('2', whoPlay()));
+    // console.log(clickOnCell('4', whoPlay()));
+    // console.log(clickOnCell('8', whoPlay()));
+    // console.log(clickOnCell('5', whoPlay()));
+    // console.log(clickOnCell('3', whoPlay()));
+    // console.log(clickOnCell('1', whoPlay()));
+    // console.log(clickOnCell('7', whoPlay()));
+    // console.log(clickOnCell('6', whoPlay()));
+    // console.log(clickOnCell('0', whoPlay()));
+    // console.log(clickOnCell('0', whoPlay()));
 
 });
