@@ -121,11 +121,6 @@ $(document).ready(function(){
 
 
   //-----------------------------------------------------------
-// not necessary
-  // $('.close').click(function(){
-  //   modal.css('display','none');
-  //   gameReset();
-  // });
 
   // $(document).not(modal).click(function(){
   //   modal.css('display','none');

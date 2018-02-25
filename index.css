@@ -94,21 +94,6 @@ tr td:last-child {
     width: 60%;
 }
 
-
-.close {
-    color: lightgray;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: whitesmoke;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 button#restart {
   background-color: inherit;
   border:none;
