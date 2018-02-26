@@ -1,0 +1,245 @@
+html, body {
+  height: 100%
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  color: #334431;
+  /* background: linear-gradient(-90deg, #b56969, #22264b); */
+  background-color: #e6af4b;
+}
+
+/* Frame  ------------------------------------------------------- */
+
+main {
+  /* Height and width fallback for older browsers. */
+  height: 100%;
+  width: 100%;
+
+  width: 90vw;
+  height: 90vh;
+  padding: 10px 20px;
+  margin: auto;
+  display: flex;
+}
+
+#left {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+#right {
+  width:20%;
+}
+
+/*  Left - Gameboard   -------------------------------------------------- */
+#playArea {
+  height: 90%;
+  padding-top: 20px;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+}
+
+
+td {
+  width: 120px;
+  height: 120px;
+  border: 4px black solid;
+  cursor: pointer;
+  text-align: center;
+  font-family: fantasy,Helvetica, Arial;
+  font-weight: bold;
+  color: black;
+  font-size: 3.5em;
+}
+
+tr:first-child td {
+  border-top: none;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr td:first-child {
+  border-left: none;
+}
+
+tr td:last-child {
+  border-right: none;
+}
+
+/*  Left - Control Panel --------------------------------------------- */
+
+#controlArea {
+  height: 10%;
+  text-align: center;
+  padding-top: 10px;;
+}
+
+#newGame {
+  width: 40%;
+  outline: none;
+  padding: 10px 5px 5px 5px;
+  color:white;
+  font-size: 1em;
+  font-family: fantasy;
+  letter-spacing: 2px;
+  background-color: #334431;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#newGame:hover .newGame-icon{
+  color: black;
+}
+
+/*  Right - sideHeader --------------------------------------------- */
+
+#sideHeader {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#sideHeader .title {
+  flex-grow: 3;
+  font-size: 70px;
+  font-weight: bolder;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.title span {
+  animation-name: welcome;
+  animation-duration: 4s;
+  animation-iteration-count: 2;
+  animation-direction: alternate;
+   animation-fill-mode: forwards;
+}
+
+@keyframes welcome {
+  /* 0%   {transform: rotate(0deg);}
+  25%  {transform: rotate(20deg);}
+  50%  {transform: rotate(0deg);}
+  75%  {transform: rotate(-20deg);}
+  100% {transform: rotate(0deg);} */
+  0%   {font-size: 0.8em;}
+  25%  {font-size: 1em;}
+  50%  {font-size: 0.8em;}
+  75%  {font-size: 1.2em;}
+  100% {font-size: 1em;}
+}
+
+#sideHeader #author {
+  font-weight: bold;
+  flex-grow: 1;
+  text-align: right;
+  color: #e05038;
+}
+
+#author span {
+  border-bottom: 1px white solid;
+  padding-bottom: 4px;
+  font-size: 0.8em;
+  margin-right: 10px;
+}
+#author a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#author a:hover {
+  font-size: 1.2em;
+}
+
+.author-icon:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* The Modal (background) -------------------------------------------- */
+#gameEndModel, #gameStartModel {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    text-align: center;
+    background-color: #e05038;
+    color: black;
+    font-size: 30px;
+    font-family: Helvetica;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 10px 20px;
+    width: 40%;
+}
+.modal-content-start {
+    text-align: center;
+    background-color: #e05038;
+    color: white;
+    font-size: 4em;
+    font-family: Helvetica;
+    letter-spacing: 5px;
+    margin: 20% auto;
+}
+
+button#restart {
+  margin-top: 10px;
+  background-color: inherit;
+  border:none;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: white;
+  cursor: pointer;
+}
+.replay-icon {
+  font-size: 30px;
+  -webkit-transition: width 2s, height 2s, -webkit-transform 1s;
+  transition: width 2s, height 2s, transform 1s;
+}
+
+button#restart:hover .replay-icon{
+  -webkit-transform: rotate(300deg);
+  transform: rotate(300deg);
+}
+
+#messageBox {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em;
+    animation: typing 3s steps(30, end);
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
