@@ -16,7 +16,8 @@ $(document).ready(function(){
                         [2,4,6]
                       ];
 
-  const modal = $('.modal');
+  const gameEndModal = $('#gameEndModel');
+  const gameStartModel = $('#gameStartModel');
 
 
 
@@ -46,13 +47,13 @@ $(document).ready(function(){
       if(gameResult =='X' || gameResult =='O'){
         message = `The winner is ${gameResult}`;
         deleverMessage(message);
-        winningBackground(winCombo, 'hotpink');
-        modal.css('display','block');
+        winningDeclare(winCombo, 'red');
+        gameEndModal.css('display','block');
         return message;
       }else if(gameResult =='tie'){
-        message = `No winner. Game Over.`;
+        message = `No more moves.`;
         deleverMessage(message);
-        modal.css('display','block');
+        gameEndModal.css('display','block');
         return message;
       }else{
         $('#messageBox').html(message);
@@ -91,22 +92,35 @@ $(document).ready(function(){
     newBoard();
     winCombo = null;
     $('.cell').html('');
-    $('.cell').css('background-color','inherit');
+    $('.cell').css('color','black');
   }
 
   function deleverMessage(input){
     $('#messageBox').html(input);
   }
 
-  function winningBackground(paintWhere, color){
+  function winningDeclare(paintWhere, color){
     for(let ele of paintWhere){
       let temp = `.cell#${ele}`;
-      $(temp).css('background-color',color);
+      // $(temp).css('background-color',color);
+      $(temp).css('color',color);
     }
   }
+
+  function showGameStart(){
+    gameStartModel.css('display','block');
+    setTimeout(function(){
+      gameStartModel.css('display','none');
+    },500);
+  }
+
   //-----------------------------------------------------------
 
-  gameReset();
+  $('#newGame').click(function(){
+    showGameStart()
+    gameReset();
+  })
+
 
   $('tbody').delegate('.cell','click', function(){
     let location = $( this ).attr('id');
@@ -115,7 +129,11 @@ $(document).ready(function(){
 
   $('#restart').click(function(){
     gameReset();
-    modal.css('display','none');
+    gameEndModal.css('display','none');
+    setTimeout(function(){
+      showGameStart()
+    },200);
+
   });
 
 
