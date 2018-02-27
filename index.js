@@ -1,3 +1,16 @@
+const onloadModal = document.querySelector('#onloadModal');
+function onloadMessage(){
+  onloadModal.style.display = "block";
+  setTimeout(function(){
+    onloadModal.style.display = "none";
+  },3000);
+}
+
+window.onload = function(){
+  onloadMessage();
+}
+
+
 $(document).ready(function(){
   console.log('ready!');
 
