@@ -31,8 +31,15 @@ $(document).ready(function(){
 
   const gameEndModal = $('#gameEndModel');
   const gameStartModel = $('#gameStartModel');
-
-
+  let xWin = 0, oWin = 0, even = 0;
+  $('#author span').click(function(){
+     stats();
+  })
+  function stats(){
+    console.log(`x: ${xWin}`);
+    console.log(`o: ${oWin}`);
+    console.log(`even: ${even}`);
+  }
 
   function newBoard(){
     for(let i = 0; i < 9; i++){
@@ -56,6 +63,14 @@ $(document).ready(function(){
       gameBoard[where] = who;
       counter++;
       gameResult = checkWin();
+
+      if(gameResult == 'X'){
+        xWin ++;
+      }else if(gameResult == 'O'){
+        oWin ++;
+      }else if(gameReset == 'tie'){
+        even ++;
+      }
 
       if(gameResult =='X' || gameResult =='O'){
         message = `The winner is ${gameResult}`;

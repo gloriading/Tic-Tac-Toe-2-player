@@ -80,8 +80,8 @@ tr td:last-child {
   padding-top: 10px;;
 }
 
-#newGame {
-  width: 40%;
+#controlArea button {
+  width: 200px;
   outline: none;
   padding: 10px 5px 5px 5px;
   color:white;
@@ -94,7 +94,11 @@ tr td:last-child {
   cursor: pointer;
 }
 
-#newGame:hover .newGame-icon{
+#gameResult {
+  display: none;
+}
+
+#newGame:hover .newGame-icon, #gameResult:hover .gameResult-icon{
   color: black;
 }
 
