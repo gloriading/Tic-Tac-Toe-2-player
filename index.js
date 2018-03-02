@@ -3,7 +3,7 @@ function onloadMessage(){
   onloadModal.style.display = "block";
   setTimeout(function(){
     onloadModal.style.display = "none";
-  },3000);
+  },2500);
 }
 
 window.onload = function(){
@@ -109,9 +109,12 @@ $(document).ready(function(){
         }
 
     }
-    if(gameBoard.every(cell => cell != 'empty')){
-      winner = "tie";
-    }
+    setTimeout(function(){
+      if(gameBoard.every(cell => cell != 'empty')){
+        winner = "tie";
+      }
+    },10)
+
     return winner;
   }
 
