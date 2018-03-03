@@ -32,9 +32,11 @@ $(document).ready(function(){
   const gameEndModal = $('#gameEndModel');
   const gameStartModel = $('#gameStartModel');
   let xWin = 0, oWin = 0, even = 0;
+
   $('#author span').click(function(){
      stats();
   })
+
   function stats(){
     console.log(`x: ${xWin}`);
     console.log(`o: ${oWin}`);
@@ -109,11 +111,11 @@ $(document).ready(function(){
         }
 
     }
-    setTimeout(function(){
-      if(gameBoard.every(cell => cell != 'empty')){
+
+      if(winner == 'undecided' && gameBoard.every(cell => cell != 'empty')){
         winner = "tie";
       }
-    },10)
+
 
     return winner;
   }
