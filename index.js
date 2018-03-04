@@ -3,7 +3,7 @@ function onloadMessage(){
   onloadModal.style.display = "block";
   setTimeout(function(){
     onloadModal.style.display = "none";
-  },2500);
+  },6000);
 }
 
 window.onload = function(){
@@ -135,7 +135,6 @@ $(document).ready(function(){
   function winningDeclare(paintWhere, color){
     for(let ele of paintWhere){
       let temp = `.cell#${ele}`;
-      // $(temp).css('background-color',color);
       $(temp).css('color',color);
     }
   }
@@ -147,17 +146,31 @@ $(document).ready(function(){
     },500);
   }
 
+  function checkEmptyBoard(){
+    if ( gameBoard.every(cell => cell == 'empty') ){
+      return true;
+    }
+  }
+
   //-----------------------------------------------------------
 
-  $('#newGame').click(function(){
-    showGameStart()
-    gameReset();
-  })
+  // $('#newGame').click(function(){
+  //   showGameStart();
+  //   gameReset();
+  // })
 
-
+  // Click on an empty board to start.
   $('tbody').delegate('.cell','click', function(){
     let location = $( this ).attr('id');
-    clickOnCell(location, whoPlay());
+    if( checkEmptyBoard() && xWin == oWin == even == 0) {
+      showGameStart();
+      gameReset();
+      setTimeout(function(){
+        clickOnCell(location, whoPlay());
+      },1000);
+    } else {
+      clickOnCell(location, whoPlay());
+    }
   })
 
   $('#restart').click(function(){
@@ -169,36 +182,5 @@ $(document).ready(function(){
 
   });
 
-
-
-  // -------------------------------------------------------------- TESTING
-
-    // gameReset();
-    // console.log(clickOnCell('4', whoPlay())); // first player is X
-    // console.log(clickOnCell('0', whoPlay()));
-    // console.log(clickOnCell('6', whoPlay()));
-    // console.log(clickOnCell('2', whoPlay()));
-    // console.log(clickOnCell('8', whoPlay()));
-    // console.log(counter);
-    // console.log(clickOnCell('1', whoPlay()));
-    // console.log(counter);
-    // console.log(clickOnCell('7', whoPlay()));
-    // console.log(counter);
-    // console.log(clickOnCell('3', whoPlay()));
-    // console.log(clickOnCell('5', whoPlay()));
-    // console.log(clickOnCell('4', whoPlay()));
-
-    // console.log(gameBoard);
-
-    // console.log(clickOnCell('2', whoPlay()));
-    // console.log(clickOnCell('4', whoPlay()));
-    // console.log(clickOnCell('8', whoPlay()));
-    // console.log(clickOnCell('5', whoPlay()));
-    // console.log(clickOnCell('3', whoPlay()));
-    // console.log(clickOnCell('1', whoPlay()));
-    // console.log(clickOnCell('7', whoPlay()));
-    // console.log(clickOnCell('6', whoPlay()));
-    // console.log(clickOnCell('0', whoPlay()));
-    // console.log(clickOnCell('0', whoPlay()));
 
 });
